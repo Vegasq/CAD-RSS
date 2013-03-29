@@ -22,7 +22,7 @@ class CADRss:
     <entry>
         <title>{{ item[0] }}</title>
         <link href="{{ link }}{{ item[1] }}"/>
-        <content type="html"><![CDATA[{{ item[2] }}123]]></content>
+        <content type="html"><![CDATA[{{ item[2] }}]]></content>
     </entry>
     {% endfor %}
 </feed>"""
