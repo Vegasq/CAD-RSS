@@ -1,11 +1,10 @@
 #!/usr/bin/python3
-
 try:
     import requests
     from bs4 import BeautifulSoup
     from jinja2 import Template
 except ImportError:
-    raise Exception('Please run "sudo apt-get install python-requests python3-requests python-beautifulsoup python-jinja2 python3-jinja2"')
+    raise Exception('Please run "sudo apt-get install python-requests python3-requests python-beautifulsoup python-jinja2 python3-jinja2 python-bs4 python3-bs4"')
 
 
 class CADRss:
@@ -33,7 +32,12 @@ class CADRss:
         url = "%s%s" % (self.basic_url, url)
 
         data = requests.get(url)
-        soup = BeautifulSoup(data.text)
+        
+        if 'text' in dir(data):
+            soup = BeautifulSoup(data.text)
+        else:
+            soup = BeautifulSoup(data.content)
+
         title = soup.find('title').text
         cont = soup.find(id='content')
         back = soup.find_all("a", text="Back")
