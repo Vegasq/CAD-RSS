@@ -5,8 +5,7 @@ Ctrl+Alt+Del comics RSS generator.
 
 Test
 =======
-http://cad.lifeandsticker.com/
-
+http://cad.lifeandstickers.com/
 
 Usage
 =======
