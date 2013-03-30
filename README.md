@@ -11,7 +11,7 @@ http://cad.lifeandsticker.com/
 Usage
 =======
 
-#!/bin/bash
+!/bin/bash
 
 cd /opt/cad/
 
