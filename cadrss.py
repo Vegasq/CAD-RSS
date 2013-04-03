@@ -49,7 +49,11 @@ class CADRss:
         open_url = "%s%s" % (self.basic_url, url)
 
         data = requests.get(open_url)
-        soup = BeautifulSoup(data.text)
+        try:
+            soup = BeautifulSoup(data.text)
+        except AttributeError:
+            soup = BeautifulSoup(data.content)
+        
         title = soup.find('title').text
 
         d = self.d.split(title)
