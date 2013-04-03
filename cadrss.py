@@ -1,4 +1,6 @@
 #!/usr/bin/python3
+# Nikolay Yakovlev <niko.yakovlev@yandex.ru>
+# 2013
 
 try:
     import requests
@@ -44,33 +46,43 @@ class CADRss:
 </feed>"""
 
     def read(self, url=False):
+        # Set url for first iter
         if url == False:
             url = self.start_from
         open_url = "%s%s" % (self.basic_url, url)
 
+        # Send request
         data = requests.get(open_url)
+
+        # Python2/3 comp
         try:
             soup = BeautifulSoup(data.text)
         except AttributeError:
             soup = BeautifulSoup(data.content)
         
+        # Save page title...
         title = soup.find('title').text
-
         d = self.d.split(title)
+        # ... and extract
         year, mon, day = d[1].split('-')
         pubDate = datetime.datetime(int(year), int(mon), int(day), 10, 10, 10)
         pubDate = pubDate.strftime("%a, %d %b %Y %H:%M:%S %z")
         if not self.updated:
+            # Save last update date
             self.updated = pubDate
 
+        # Biggest div
         cont = soup.find(id='content')
+
+        # URL to next comics
         back = soup.find_all("a", text="Back")
+        next_url = back[0].attrs['href']
+
+        # Image
         i = cont.find('img')
         html = i.encode('ascii').decode('utf-8')
-        next_url = back[0].attrs['href']
+
         self.result.append((title, open_url, html, pubDate))
-
-
 
         self.count -= 1
         if not self.count:
