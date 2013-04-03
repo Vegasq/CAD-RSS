@@ -20,7 +20,10 @@ class CADRss:
 
     template = """<?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
-    <author>Ctrl+Alt+Del</author>
+    <author>
+        <name>Ctrl+Alt+Del</name>
+        <email>pierre@cad-comic.com</email>
+    </author>
     <title>Ctrl+Alt+Del</title>
     <link>http://www.cad-comic.com/</link>
     <updated>{{ updated }}</updated>
