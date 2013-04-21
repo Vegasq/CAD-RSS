@@ -52,10 +52,14 @@ class CADRss:
 
     def get_soup(self, request_obj):
         soup = False
-        if 'content' in dir(request_obj):
+
+        try:
             txt = request_obj.text
-            txt = txt.replace(self.atom, '')
-            soup = BeautifulSoup(txt, "xml")
+        except AttributeError:
+            txt = request_obj.content
+        txt = txt.replace(self.atom, '')
+        soup = BeautifulSoup(txt, "xml")
+
         return soup
 
     def __init__(self):
